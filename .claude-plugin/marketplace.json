@@ -27,6 +27,10 @@
         {
             "name": "code-apps-preview",
             "source": "./plugins/code-apps"
+        },
+        {
+            "name": "mobile-app",
+            "source": "./plugins/mobile-apps"
         }
     ]
 }
