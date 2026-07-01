@@ -4,7 +4,7 @@ This template is an Expo, React Native, and TypeScript starter for building a st
 
 ## Requirements
 
-- Node.js 20 LTS.
+- Node.js 22 LTS.
 - npm 10 or newer.
 - The Power Apps Developer app from the Apple App Store or Google Play.
 
@@ -22,7 +22,7 @@ connector wiring.
 	npm install
 	```
 
-2. Install the mobile-app skill from the Power Platform Skills plugin.
+2. Install the mobile-app plugin from the Power Platform Skills marketplace.
 
 	For GitHub Copilot in VS Code:
 
@@ -35,6 +35,13 @@ connector wiring.
 		```
 
 	4. Reload VS Code if prompted, then open Copilot Chat in Agent mode.
+
+	Alternatively, install it from a terminal with GitHub Copilot CLI:
+
+	```sh
+	copilot plugin marketplace add microsoft/power-platform-skills
+	copilot plugin install mobile-app@power-platform-skills
+	```
 
 	For Claude CLI:
 
