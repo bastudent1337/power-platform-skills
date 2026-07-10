@@ -1,0 +1,25 @@
+name: sync-upstream
+# Lives on the non-default `ops` branch on purpose: `main` stays a byte-pristine,
+# fast-forward-only mirror of microsoft/power-platform-skills (fork SHAs == upstream
+# SHAs), which keeps every vendored pin resolvable against upstream history.
+# The weekly digest session triggers this via workflow_dispatch with ref=ops.
+# The cron below is inert while `ops` is not the repository default branch; set the
+# default branch to `ops` to activate scheduled runs (then mind GitHub's 60-day
+# scheduled-workflow auto-disable on inactive repos).
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 12 * * 1"
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fast-forward main from upstream
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # gh repo sync uses the merge-upstream API: with a pristine main this is a
+        # fast-forward; on divergence it fails loudly instead of rewriting history.
+        # Never add --force — a loud failure here is the pristine-mirror guard.
+        run: gh repo sync ${{ github.repository }} --source microsoft/power-platform-skills --branch main
